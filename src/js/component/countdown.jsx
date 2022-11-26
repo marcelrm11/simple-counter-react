@@ -1,14 +1,13 @@
 import React from "react";
 
-const countDownStart = 10;
-
 class CountDown extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             startAt: '',
-            counter: '[type to start]',
+            counter: '0',
             running: false,
+            finished: false,
         }
         this.startCounter = this.startCounter.bind(this);
         this.stopCounter = this.stopCounter.bind(this);
@@ -32,16 +31,17 @@ class CountDown extends React.Component {
     }
 
     restartCounter() {
+        if (this.state.finished == true) this.state.finished = false;
         this.state.counter = this.state.running
-        ? this.state.startAt + 1 
-        : this.state.startAt;
-        this.startCounter();
+            ? this.state.startAt + 1 
+            : this.state.startAt;
+            this.startCounter();
     }
 
     second() {
         if (this.state.counter > 0 && this.state.running) {
             this.setState((prevState) => ({counter: prevState.counter - 1}));
-        }
+        } else if (this.state.counter == 0) this.state.finished = true;
     }
 
     handleChange(event) {
@@ -63,6 +63,11 @@ class CountDown extends React.Component {
                     {' '}s
                 </h2>
                 <h2>Countdown: {this.state.counter} s</h2>
+                { this.state.finished && 
+                <div className="alert alert-danger alert-dismissible fade show w-50 fs-3 mx-auto" role="alert">
+                    Time is over!
+                    <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div> }
                 <button onClick={this.startCounter}>Start</button>
                 <button onClick={this.stopCounter}>Stop</button>
                 <button onClick={this.restartCounter}>Restart</button>
