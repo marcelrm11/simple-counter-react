@@ -17,7 +17,10 @@ const startTime = new Date();
 function Home() {
 	return (
 		<div style={homeStyles}>
-			<Tick date={new Date()} seconds={Math.floor((new Date() - startTime) / 1000)}/>
+			<Tick 
+				date={new Date()} 
+				seconds={Math.floor((new Date() - startTime) / 1000)}
+			/>
 			<CountDown />
 		</div>
 	)
