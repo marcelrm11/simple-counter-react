@@ -1,26 +1,35 @@
 import React from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import Tick from "./tick.jsx";
+import CountDown from "./countdown.jsx";
 
-//create your first component
-const Home = () => {
+const homeStyles = {
+	fontSize: "42px",
+	backgroundColor: "#222",
+	padding: "2em 0",
+	color: "white",
+    textAlign: "center",
+}
+
+const startTime = new Date();
+
+// if Tick is functional
+function Home() {
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div style={homeStyles}>
+			<Tick date={new Date()} seconds={Math.floor((new Date() - startTime) / 1000)}/>
+			<CountDown />
 		</div>
-	);
+	)
 };
+
+// if Tick is class
+// function Home() {
+// 	return (
+// 		<div style={homeStyles}>
+// 			<Tick />
+// 		</div>
+// 	)
+// };
 
 export default Home;
