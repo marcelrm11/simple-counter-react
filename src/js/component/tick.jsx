@@ -14,7 +14,7 @@ function Tick(props){
 }
 // end FUNCTIONAL COMPONENT
 
-// CLASS COMPONENT
+// CLASS COMPONENT using lifecycle 
 // class Tick extends React.Component {
 //     constructor(props) {
 //         super(props);
