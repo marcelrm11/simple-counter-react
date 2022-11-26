@@ -17,7 +17,7 @@ class CountDown extends React.Component {
 
     startCounter() {
         if (!this.state.running) {
-            this.state.running = true;
+            this.setState({running: true});
             this.timerID = setInterval(
                 () => this.second(),
                 1000
@@ -26,22 +26,23 @@ class CountDown extends React.Component {
     }
 
     stopCounter() {
-        this.state.running = false;
+        this.setState({running: false});
         clearInterval(this.timerID);
     }
 
     restartCounter() {
-        if (this.state.finished == true) this.state.finished = false;
-        this.state.counter = this.state.running
+        if (this.state.finished == true) this.setState({finished: false});
+        let value = this.state.running
             ? this.state.startAt + 1 
             : this.state.startAt;
             this.startCounter();
+        this.setState({counter: value});
     }
 
     second() {
         if (this.state.counter > 0 && this.state.running) {
             this.setState((prevState) => ({counter: prevState.counter - 1}));
-        } else if (this.state.counter == 0) this.state.finished = true;
+        } else if (this.state.counter == 0) this.setState({finished: true});
     }
 
     handleChange(event) {
